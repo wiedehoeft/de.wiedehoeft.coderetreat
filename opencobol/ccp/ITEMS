@@ -1,0 +1,4 @@
+      *01 ITEM.
+         10 NAME                       PIC  X(050).
+         10 SELL-IN                    PIC  S9(004).
+         10 QUALITY                    PIC  9(003).
