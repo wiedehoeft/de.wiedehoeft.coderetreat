@@ -32,22 +32,8 @@
 
            PERFORM VARYING COUNTER FROM 1 BY 1
            UNTIL COUNTER > NUMBER-INPUT
-               MOVE COUNTER TO DIVISOR
-               DIVIDE DIVISIOR-3 INTO DIVISOR GIVING ANY-2 REMAINDER
-               HAS-REMAINING
-               IF HAS-REMAINING = 0
-                   DISPLAY "Dividable by three"
-                   SET HAS-FIZZ(COUNTER) TO TRUE
-               END-IF
-
-               MOVE COUNTER TO DIVISOR
-               DIVIDE DIVISIOR-5 INTO DIVISOR GIVING ANY-2 REMAINDER
-               HAS-REMAINING
-               IF HAS-REMAINING = 0
-                   DISPLAY "Dividable by five"
-                   SET HAS-BUZZ(COUNTER) TO TRUE
-               END-IF
-
+               PERFORM CHECK-FOR-DIVIDABLE-BY-THREE
+               PERFORM CHECK-FOR-DIVIDABLE-BY-FIVE
                MOVE COUNTER TO FORMATTED-COUNTER(COUNTER)
            END-PERFORM
 
@@ -55,24 +41,11 @@
            PERFORM VARYING COUNTER FROM 1 BY 1
            UNTIL COUNTER > NUMBER-INPUT
                IF HAS-FIZZ(COUNTER)
-                   DISPLAY "Processing Fizz"
-                   STRING "Fizz"
-                   INTO CONVERTED(LAST-POS:
-                       FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
-
-                   MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
-                   TO LAST-POS
-                   COMPUTE LAST-POS = LAST-POS * COUNTER + 1
-               ELSE IF HAS-BUZZ(COUNTER)
-                   DISPLAY "Processing Buzz"
-                   STRING "Buzz"
-                   INTO CONVERTED(LAST-POS:
-                       FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
-
-                   MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
-                   TO LAST-POS
-                   COMPUTE LAST-POS = LAST-POS * COUNTER + 1
-                ELSE
+                   PERFORM PRINT-FIZZ
+               ELSE
+                 IF HAS-BUZZ(COUNTER)
+                  PERFORM PRINT-BUZZ
+                 ELSE
                    STRING FORMATTED-COUNTER(COUNTER)
                    INTO CONVERTED(LAST-POS:
                        FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
@@ -80,8 +53,52 @@
                    MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
                    TO LAST-POS
                    COMPUTE LAST-POS = LAST-POS * COUNTER + 1
-                END-IF
+                 END-IF
+               END-IF
            END-PERFORM
 
        GOBACK.
+
+           CHECK-FOR-DIVIDABLE-BY-THREE SECTION.
+               MOVE COUNTER TO DIVISOR
+                   DIVIDE DIVISIOR-3 INTO DIVISOR GIVING ANY-2 REMAINDER
+                   HAS-REMAINING
+                   IF HAS-REMAINING = 0
+                       DISPLAY "Dividable by three"
+                       SET HAS-FIZZ(COUNTER) TO TRUE
+                   END-IF
+           EXIT.
+
+           CHECK-FOR-DIVIDABLE-BY-FIVE SECTION.
+               MOVE COUNTER TO DIVISOR
+               DIVIDE DIVISIOR-5 INTO DIVISOR GIVING ANY-2 REMAINDER
+               HAS-REMAINING
+               IF HAS-REMAINING = 0
+                   DISPLAY "Dividable by five"
+                   SET HAS-BUZZ(COUNTER) TO TRUE
+               END-IF
+           EXIT.
+
+           PRINT-FIZZ SECTION.
+             DISPLAY "Processing Fizz"
+             STRING "Fizz"
+             INTO CONVERTED(LAST-POS:
+                 FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
+
+             MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
+             TO LAST-POS
+             COMPUTE LAST-POS = LAST-POS * COUNTER + 1
+           EXIT.
+
+           PRINT-BUZZ SECTION.
+             DISPLAY "Processing Buzz"
+             STRING "Buzz"
+             INTO CONVERTED(LAST-POS:
+               FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
+
+             MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
+             TO LAST-POS
+             COMPUTE LAST-POS = LAST-POS * COUNTER + 1
+           EXIT.
+
        END PROGRAM FIZZBUZZ.
