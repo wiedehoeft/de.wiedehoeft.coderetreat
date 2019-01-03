@@ -19,14 +19,14 @@
        FIZZ-CONVERSION SECTION.
       * Arrange
            INITIALIZE FIZZ-BUZZ-DATA
-           MOVE "1 2 3" TO NUMBER-INPUT
+           MOVE 3 TO NUMBER-INPUT
 
       * Act
            CALL "FizzBuzz" USING FIZZ-BUZZ-DATA
            END-CALL
 
       * Assert
-           MOVE "1 2 Fizz" TO EXPECTED
+           MOVE "   1   2Fizz" TO EXPECTED
            CALL "Assertions2" USING CONVERTED EXPECTED
 
        EXIT.

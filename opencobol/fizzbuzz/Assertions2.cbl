@@ -37,9 +37,9 @@
 
                    DISPLAY "But was: "
                    GIVEN(1:GIVEN-STRING-LENGTH) ". "
-               END-IF
 
-            MOVE 8 TO RETURN-CODE
+                   MOVE 8 TO RETURN-CODE
+               END-IF
 
             STOP RUN.
 
