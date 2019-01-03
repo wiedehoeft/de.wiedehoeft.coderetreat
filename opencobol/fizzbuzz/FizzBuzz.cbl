@@ -20,9 +20,11 @@
        01 ANY-2 PIC 9(004).
        01 HAS-REMAINING PIC 9(004).
 
-       01 FIZZBUZZ-VALUE PIC 9(001) OCCURS 9999.
+       01 FIZZ-VALUE PIC 9(001) OCCURS 9999.
            88 HAS-FIZZ VALUE 1.
-           88 HAS-BUZZ VALUE 2.
+
+       01 BUZZ-VALUE PIC 9(001) OCCURS 9999.
+           88 HAS-BUZZ VALUE 1.
 
        LINKAGE SECTION.
        01 FIZZ-BUZZ-DATA.    COPY FIZZ-BUZZ-DATA.
@@ -40,19 +42,23 @@
            MOVE 1 TO LAST-POS
            PERFORM VARYING COUNTER FROM 1 BY 1
            UNTIL COUNTER > NUMBER-INPUT
-               IF HAS-FIZZ(COUNTER)
-                   PERFORM PRINT-FIZZ
+               IF HAS-FIZZ(COUNTER) AND HAS-BUZZ(COUNTER)
+                 PERFORM PRINT-FIZZ-BUZZ
                ELSE
-                 IF HAS-BUZZ(COUNTER)
-                  PERFORM PRINT-BUZZ
+                 IF HAS-FIZZ(COUNTER)
+                     PERFORM PRINT-FIZZ
                  ELSE
-                   STRING FORMATTED-COUNTER(COUNTER)
-                   INTO CONVERTED(LAST-POS:
-                       FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
+                   IF HAS-BUZZ(COUNTER)
+                    PERFORM PRINT-BUZZ
+                   ELSE
+                     STRING FORMATTED-COUNTER(COUNTER)
+                     INTO CONVERTED(LAST-POS:
+                         FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
 
-                   MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
-                   TO LAST-POS
-                   COMPUTE LAST-POS = LAST-POS * COUNTER + 1
+                     MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
+                     TO LAST-POS
+                     COMPUTE LAST-POS = LAST-POS * COUNTER + 1
+                   END-IF
                  END-IF
                END-IF
            END-PERFORM
@@ -64,7 +70,7 @@
                    DIVIDE DIVISIOR-3 INTO DIVISOR GIVING ANY-2 REMAINDER
                    HAS-REMAINING
                    IF HAS-REMAINING = 0
-                       DISPLAY "Dividable by three"
+                       DISPLAY "Dividable by three " COUNTER
                        SET HAS-FIZZ(COUNTER) TO TRUE
                    END-IF
            EXIT.
@@ -74,7 +80,7 @@
                DIVIDE DIVISIOR-5 INTO DIVISOR GIVING ANY-2 REMAINDER
                HAS-REMAINING
                IF HAS-REMAINING = 0
-                   DISPLAY "Dividable by five"
+                   DISPLAY "Dividable by five: " COUNTER
                    SET HAS-BUZZ(COUNTER) TO TRUE
                END-IF
            EXIT.
@@ -95,6 +101,16 @@
              STRING "Buzz"
              INTO CONVERTED(LAST-POS:
                FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
+
+             MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
+             TO LAST-POS
+             COMPUTE LAST-POS = LAST-POS * COUNTER + 1
+           EXIT.
+
+           PRINT-FIZZ-BUZZ SECTION.
+             DISPLAY "Processing Fizz-Buzz"
+             STRING "Fizz-Buzz"
+             INTO CONVERTED(LAST-POS:9)
 
              MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
              TO LAST-POS

@@ -15,6 +15,7 @@
        MAIN-PROCEDURE.
            PERFORM FIZZ-CONVERSION.
            PERFORM BUZZ-CONVERSION.
+           PERFORM FIZZ-BUZZ-CONVERSION.
        STOP RUN.
 
        FIZZ-CONVERSION SECTION.
@@ -53,6 +54,29 @@
 
       * Assert
            MOVE "   1   2Fizz   4Buzz" TO EXPECTED
+           CALL "Assertions2" USING CONVERTED EXPECTED
+           END-CALL
+
+       EXIT.
+
+       FIZZ-BUZZ-CONVERSION SECTION.
+       DISPLAY " "
+       DISPLAY "Fizz Buzz Conversion"
+
+      * Arrange
+           INITIALIZE FIZZ-BUZZ-DATA
+           INITIALIZE EXPECTED
+           INITIALIZE CONVERTED
+           MOVE 15 TO NUMBER-INPUT
+
+      * Act
+           CALL "FizzBuzz" USING FIZZ-BUZZ-DATA
+           END-CALL
+
+      * Assert
+           MOVE "   1   2Fizz   4BuzzFizz   7   8FizzBuzz  11Fizz  13  1
+      -    "4Fizz-Buzz"
+             TO EXPECTED
            CALL "Assertions2" USING CONVERTED EXPECTED
            END-CALL
 

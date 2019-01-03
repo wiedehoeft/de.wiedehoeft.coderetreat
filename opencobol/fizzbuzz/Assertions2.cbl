@@ -37,7 +37,7 @@
                    DISPLAY "Expected result was: "
                    EXPECTED(1:EXPECTED-STRING-LENGTH) ". "
 
-                   DISPLAY "But was: "
+                   DISPLAY "But was:             "
                    GIVEN(1:GIVEN-STRING-LENGTH) ". "
 
                    MOVE 8 TO RETURN-CODE
