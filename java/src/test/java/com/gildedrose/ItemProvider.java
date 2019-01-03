@@ -1,7 +1,7 @@
 package com.gildedrose;
 
 public enum ItemProvider {
-    AGED_BRIE_NORMAL("Aged Brie", 10, 10, "Aged Br", 10, 10),
+    AGED_BRIE_NORMAL("Aged Brie", 10, 10, "Aged Br", 10, 10);
 
     private String itemName;
     private int sellIn;
