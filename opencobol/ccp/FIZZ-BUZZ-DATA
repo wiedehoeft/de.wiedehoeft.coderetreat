@@ -1,0 +1,3 @@
+      *01 FIZZ-BUZZ-DATA.
+        05 NUMBER-INPUT    PIC X(999).
+        05 CONVERTED       PIC X(9999).
