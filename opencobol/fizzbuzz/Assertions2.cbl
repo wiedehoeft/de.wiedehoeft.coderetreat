@@ -26,6 +26,8 @@
        PROCEDURE DIVISION USING GIVEN EXPECTED.
 
            MAIN-PROCEDURE.
+               INITIALIZE STRING-EQUALS
+
                IF GIVEN IS EQUAL TO EXPECTED
                        SET TRUE-VALUE TO TRUE
                END-IF
@@ -41,7 +43,7 @@
                    MOVE 8 TO RETURN-CODE
                END-IF
 
-            STOP RUN.
+            GOBACK.
 
            FORMAT-OUTPUT SECTION.
                INSPECT FUNCTION REVERSE(EXPECTED) TALLYING

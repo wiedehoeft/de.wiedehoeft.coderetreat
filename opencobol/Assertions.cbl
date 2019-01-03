@@ -64,6 +64,6 @@
                MOVE 8 to RETURN-CODE
              END-IF
 
-            STOP RUN.
+            GOBACK.
 
        END PROGRAM ASSERTIONS.

@@ -22,6 +22,7 @@
 
        01 FIZZBUZZ-VALUE PIC 9(001) OCCURS 9999.
            88 HAS-FIZZ VALUE 1.
+           88 HAS-BUZZ VALUE 2.
 
        LINKAGE SECTION.
        01 FIZZ-BUZZ-DATA.    COPY FIZZ-BUZZ-DATA.
@@ -35,16 +36,36 @@
                DIVIDE DIVISIOR-3 INTO DIVISOR GIVING ANY-2 REMAINDER
                HAS-REMAINING
                IF HAS-REMAINING = 0
+                   DISPLAY "Dividable by three"
                    SET HAS-FIZZ(COUNTER) TO TRUE
                END-IF
+
+               MOVE COUNTER TO DIVISOR
+               DIVIDE DIVISIOR-5 INTO DIVISOR GIVING ANY-2 REMAINDER
+               HAS-REMAINING
+               IF HAS-REMAINING = 0
+                   DISPLAY "Dividable by five"
+                   SET HAS-BUZZ(COUNTER) TO TRUE
+               END-IF
+
                MOVE COUNTER TO FORMATTED-COUNTER(COUNTER)
            END-PERFORM
 
            MOVE 1 TO LAST-POS
            PERFORM VARYING COUNTER FROM 1 BY 1
            UNTIL COUNTER > NUMBER-INPUT
-               IF NOT HAS-FIZZ(COUNTER)
-                   STRING FORMATTED-COUNTER(COUNTER)
+               IF HAS-FIZZ(COUNTER)
+                   DISPLAY "Processing Fizz"
+                   STRING "Fizz"
+                   INTO CONVERTED(LAST-POS:
+                       FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
+
+                   MOVE FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER))
+                   TO LAST-POS
+                   COMPUTE LAST-POS = LAST-POS * COUNTER + 1
+               ELSE IF HAS-BUZZ(COUNTER)
+                   DISPLAY "Processing Buzz"
+                   STRING "Buzz"
                    INTO CONVERTED(LAST-POS:
                        FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
 
@@ -52,7 +73,7 @@
                    TO LAST-POS
                    COMPUTE LAST-POS = LAST-POS * COUNTER + 1
                 ELSE
-                   STRING "Fizz"
+                   STRING FORMATTED-COUNTER(COUNTER)
                    INTO CONVERTED(LAST-POS:
                        FUNCTION LENGTH(FORMATTED-COUNTER(COUNTER)))
 
