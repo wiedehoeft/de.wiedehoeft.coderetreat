@@ -35,8 +35,6 @@ The compiled modules are in a bin folder, in root of cloned directory.
 ![bin-folder](./screenshots/bin_folder_location.png)
 
 # Start the application
-First change to develop-branch!
-
 To check what the production code does the GuildedRoseRunner.cbl program can be used; it just needs to be executed.
 
 Module tests are located in GuildedRoseTest.cbl. This program can also be executed, it should finish with Return-Code 8 and a failing assertion.
