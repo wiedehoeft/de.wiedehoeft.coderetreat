@@ -8,34 +8,62 @@
        PROGRAM-ID. FIZZBUZZTEST.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 FIZZ-BUZZ-DATA.    COPY FIZZ-BUZZ-DATA.
-       01 EXPECTED           PIC X(9999).
+       01 NUMBER-CONVERSION. COPY NUMBER-CONVERSION.
+       01 EXPECTED PIC X(9999) OCCURS 9999.
+       01 COUNTER PIC 9(004).
 
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
+           PERFORM NON-CONVERSION.
            PERFORM FIZZ-CONVERSION.
            PERFORM BUZZ-CONVERSION.
            PERFORM FIZZ-BUZZ-CONVERSION.
        STOP RUN.
+
+       NON-CONVERSION SECTION.
+       DISPLAY " "
+       DISPLAY "No Conversion"
+
+      * Arrange
+           MOVE 2 TO MAX-NUMBER
+
+      * Act
+           CALL "FizzBuzz" USING NUMBER-CONVERSION
+           END-CALL
+
+      * Assert
+           MOVE "0001" TO EXPECTED(1)
+           MOVE "0002" TO EXPECTED(2)
+
+           PERFORM VARYING COUNTER FROM 1 BY 1
+             UNTIL COUNTER > 2
+
+             CALL "Assertions2"
+               USING CONVERTED(COUNTER) EXPECTED(COUNTER)
+             END-CALL
+
+           END-PERFORM
+
+       EXIT.
 
        FIZZ-CONVERSION SECTION.
        DISPLAY " "
        DISPLAY "Fizz Conversion"
 
       * Arrange
-           INITIALIZE FIZZ-BUZZ-DATA
-           INITIALIZE EXPECTED
-           INITIALIZE CONVERTED
-           MOVE 3 TO NUMBER-INPUT
+           MOVE 3 TO MAX-NUMBER
 
       * Act
-           CALL "FizzBuzz" USING FIZZ-BUZZ-DATA
+           CALL "FizzBuzz" USING NUMBER-CONVERSION
            END-CALL
 
       * Assert
-           MOVE "   1   2Fizz" TO EXPECTED
-           CALL "Assertions2" USING CONVERTED EXPECTED
+           MOVE "FIZZ" TO EXPECTED(1)
+
+           CALL "Assertions2"
+             USING CONVERTED(3) EXPECTED(1)
            END-CALL
+
        EXIT.
 
        BUZZ-CONVERSION SECTION.
@@ -43,18 +71,17 @@
        DISPLAY "Buzz Conversion"
 
       * Arrange
-           INITIALIZE FIZZ-BUZZ-DATA
-           INITIALIZE EXPECTED
-           INITIALIZE CONVERTED
-           MOVE 5 TO NUMBER-INPUT
+           MOVE 5 TO MAX-NUMBER
 
       * Act
-           CALL "FizzBuzz" USING FIZZ-BUZZ-DATA
+           CALL "FizzBuzz" USING NUMBER-CONVERSION
            END-CALL
 
       * Assert
-           MOVE "   1   2Fizz   4Buzz" TO EXPECTED
-           CALL "Assertions2" USING CONVERTED EXPECTED
+           MOVE "BUZZ" TO EXPECTED(1)
+
+           CALL "Assertions2"
+             USING CONVERTED(5) EXPECTED(1)
            END-CALL
 
        EXIT.
@@ -62,22 +89,18 @@
        FIZZ-BUZZ-CONVERSION SECTION.
        DISPLAY " "
        DISPLAY "Fizz Buzz Conversion"
-
       * Arrange
-           INITIALIZE FIZZ-BUZZ-DATA
-           INITIALIZE EXPECTED
-           INITIALIZE CONVERTED
-           MOVE 15 TO NUMBER-INPUT
+           MOVE 15 TO MAX-NUMBER
 
       * Act
-           CALL "FizzBuzz" USING FIZZ-BUZZ-DATA
+           CALL "FizzBuzz" USING NUMBER-CONVERSION
            END-CALL
 
       * Assert
-           MOVE "   1   2Fizz   4BuzzFizz   7   8FizzBuzz  11Fizz  13  1
-      -    "4Fizz-Buzz"
-             TO EXPECTED
-           CALL "Assertions2" USING CONVERTED EXPECTED
+           MOVE "FIZZBUZZ" TO EXPECTED(1)
+
+           CALL "Assertions2"
+             USING CONVERTED(15) EXPECTED(1)
            END-CALL
 
        EXIT.

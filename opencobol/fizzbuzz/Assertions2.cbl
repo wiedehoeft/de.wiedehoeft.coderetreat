@@ -34,6 +34,7 @@
 
                IF NOT TRUE-VALUE
                    PERFORM FORMAT-OUTPUT
+
                    DISPLAY "Expected result was: "
                    EXPECTED(1:EXPECTED-STRING-LENGTH) ". "
 
@@ -50,9 +51,10 @@
                        W-SPACES FOR LEADING SPACES
                    COMPUTE EXPECTED-STRING-LENGTH =
                    LENGTH OF EXPECTED - W-SPACES
+
                INSPECT FUNCTION REVERSE(GIVEN) TALLYING
                        W-SPACES FOR LEADING SPACES
                    COMPUTE GIVEN-STRING-LENGTH =
-                   LENGTH OF EXPECTED - W-SPACES
+                   LENGTH OF GIVEN - W-SPACES
            EXIT.
        END PROGRAM ASSERTIONS2.
