@@ -17,8 +17,8 @@
            MOVE ITEM(COUNTER) TO CURRENT-ITEM
 
            if name of CURRENT-ITEM not equal "Aged Brie"
-               and name of CURRENT-ITEM not equal "Backstage
-      -        " passes to a TAFKAL80ETC concert"
+               and name of CURRENT-ITEM not equal "Backstage passes to a
+      -        " TAFKAL80ETC concert"
             if quality of CURRENT-ITEM greater than 0
                 if name of CURRENT-ITEM not equal
                     to "Sulfuras, Hand of Ragnaros"
@@ -27,7 +27,7 @@
                 end-if
             end-if
            else
-            if quality of CURRENT-ITEM is less than 50
+             if quality of CURRENT-ITEM is less than 50
                 compute quality of CURRENT-ITEM
                 = quality of CURRENT-ITEM + 1
               if name of CURRENT-ITEM
@@ -45,8 +45,9 @@
                         end-if
                     end-if
                 end-if
-            end-if
-            end-if
+             end-if
+           end-if
+
            if name of CURRENT-ITEM
                not equal "Sulfuras, Hand of Ragnaros"
             compute sell-in of CURRENT-ITEM = sell-in
@@ -55,8 +56,8 @@
            if sell-in of CURRENT-ITEM is less than 0
             if name of CURRENT-ITEM is not equal to "Aged Brie"
              if name of CURRENT-ITEM
-                 is not equal to "Backstage passes to a
-      -           "TAFKAL80ETC concert"
+                 is not equal to "Backstage passes to a TAFKAL80ETC conc
+      -           "ert"
                     if quality of CURRENT-ITEM is greater than 0
                         if name of CURRENT-ITEM
                             is equal to "Sulfuras, Hand of Ragnaros"
