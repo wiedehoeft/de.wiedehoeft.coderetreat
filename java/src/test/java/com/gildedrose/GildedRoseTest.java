@@ -36,6 +36,7 @@ class GildedRoseTest {
         BACKSTAGE_PASS_10DAYS("Backstage passes to a TAFKAL80ETC concert", 10, 20, "Backstage passes to a TAFKAL80ETC concert", 9, 22),
         BACKSTAGE_PASS_5DAYS("Backstage passes to a TAFKAL80ETC concert", 5, 20, "Backstage passes to a TAFKAL80ETC concert", 4, 23),
         BACKSTAGE_PASS_0DAYS("Backstage passes to a TAFKAL80ETC concert", 0, 20, "Backstage passes to a TAFKAL80ETC concert", -1, 0),
+        BACKSTAGE_PASS_MAX_QUALITY("Backstage passes to a TAFKAL80ETC concert", 3, 50, "Backstage passes to a TAFKAL80ETC concert", 2, 50),
         ;
 
         String itemName;
