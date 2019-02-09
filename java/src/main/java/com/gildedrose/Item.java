@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.Objects;
+
 public class Item {
 
     public String name;
