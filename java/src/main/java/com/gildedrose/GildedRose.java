@@ -1,114 +1,49 @@
 package com.gildedrose;
 
+import com.gildedrose.items.AgedBrieCalculation;
+import com.gildedrose.items.BackstagePassCalculation;
+import com.gildedrose.items.LegendaryItemCalculation;
+import com.gildedrose.items.NormalItemCalculation;
+
 class GildedRose {
     private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
     private static final String LEGENDARY_ITEM_SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String AGED_BRIE = "Aged Brie";
 
-    Item[] items;
+    final Item[] items;
+
+    private final BackstagePassCalculation backstagePassCalculation;
+    private final AgedBrieCalculation agedBrieCalculation;
+    private final LegendaryItemCalculation legendaryItemCalculation;
+    private final NormalItemCalculation normalItemCalculation;
 
     GildedRose(Item[] items) {
         this.items = items;
+        this.backstagePassCalculation = new BackstagePassCalculation();
+        this.agedBrieCalculation = new AgedBrieCalculation();
+        legendaryItemCalculation = new LegendaryItemCalculation();
+        normalItemCalculation = new NormalItemCalculation();
     }
 
     void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            handleBackstagePass(i);
-            handleAgedBrie(i);
+        for (Item item : items) {
+            switch (item.name) {
+                case BACKSTAGE_PASS:
+                    backstagePassCalculation.updateQuality(item);
+                    break;
 
-            if (noBackStagePass(i) && noAgedBrie(i) && noLegendaryItem(i)) {
-                handleOtherItems(i);
+                case AGED_BRIE:
+                    agedBrieCalculation.updateQuality(item);
+                    break;
+
+                case LEGENDARY_ITEM_SULFURAS:
+                    legendaryItemCalculation.updateQuality(item);
+                    break;
+
+                default:
+                    normalItemCalculation.updateQuality(item);
+                    break;
             }
         }
-    }
-
-    private boolean noBackStagePass(int i) {
-        return !items[i].name.equals(BACKSTAGE_PASS);
-    }
-
-
-    private boolean noAgedBrie(int i) {
-        return !items[i].name.equals(AGED_BRIE);
-    }
-
-
-    private boolean noLegendaryItem(int i) {
-        return !items[i].name.equals(LEGENDARY_ITEM_SULFURAS);
-    }
-
-    private void handleOtherItems(int i) {
-        if (minQualityNotReached(items[i])) {
-            decreaseItemQuality(i);
-        }
-
-        increaseSellIn(i);
-
-        if (items[i].sellIn < 0) {
-            if (minQualityNotReached(items[i])) {
-                decreaseItemQuality(i);
-            }
-        }
-    }
-
-    private void handleAgedBrie(int i) {
-        if (items[i].name.equals(AGED_BRIE)) {
-
-            increaseSellIn(i);
-
-            if (maxQualityNotReached(items[i])) {
-                increaseItemQuality(i);
-            }
-
-            if (items[i].sellIn < 0) {
-                if (maxQualityNotReached(items[i])) {
-                    increaseItemQuality(i);
-                }
-            }
-        }
-    }
-
-    private void handleBackstagePass(int i) {
-        if (items[i].name.equals(BACKSTAGE_PASS)) {
-
-            increaseSellIn(i);
-
-            if (maxQualityNotReached(items[i])) {
-                increaseItemQuality(i);
-            }
-
-            if (items[i].sellIn < 11 && maxQualityNotReached(items[i])) {
-                increaseItemQuality(i);
-            }
-
-            if (items[i].sellIn < 6) {
-                if (maxQualityNotReached(items[i])) {
-                    increaseItemQuality(i);
-                }
-            }
-
-            if (items[i].sellIn < 0) {
-                items[i].quality = 0;
-            }
-        }
-    }
-
-    private void increaseSellIn(int i) {
-        items[i].sellIn = items[i].sellIn - 1;
-    }
-
-    private boolean minQualityNotReached(Item item) {
-        return item.quality > 0;
-    }
-
-    private boolean maxQualityNotReached(Item item) {
-        return item.quality < 50;
-    }
-
-    private void increaseItemQuality(int i) {
-        items[i].quality = items[i].quality + 1;
-    }
-
-    private void decreaseItemQuality(int i) {
-        items[i].quality = items[i].quality - 1;
     }
 }
