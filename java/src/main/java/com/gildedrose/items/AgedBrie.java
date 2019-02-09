@@ -12,16 +12,10 @@ public class AgedBrie extends QualityItem {
     public void updateQuality(Item item) {
 
         increaseSellIn(item);
-
-        if (maxQualityNotReached(item)) {
-            increaseItemQuality(item);
-        }
+        increaseItemQualityIfMaxNotReached(item);
 
         if (item.sellIn < 0) {
-            if (maxQualityNotReached(item)) {
-                increaseItemQuality(item);
-            }
-
+            increaseItemQualityIfMaxNotReached(item);
         }
     }
 }

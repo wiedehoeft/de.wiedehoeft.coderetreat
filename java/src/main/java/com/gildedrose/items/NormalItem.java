@@ -10,16 +10,12 @@ public class NormalItem extends QualityItem {
 
     @Override
     public void updateQuality(Item item) {
-        if (minQualityNotReached(item)) {
-            decreaseItemQuality(item);
-        }
+        decreaseItemQuality(item);
 
         increaseSellIn(item);
 
-        if (item.sellIn < 0) {
-            if (minQualityNotReached(item)) {
-                decreaseItemQuality(item);
-            }
+        if (sellInReached(item)) {
+            decreaseItemQuality(item);
         }
     }
 }

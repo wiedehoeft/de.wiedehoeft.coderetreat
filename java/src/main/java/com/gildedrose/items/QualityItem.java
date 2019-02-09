@@ -6,6 +6,9 @@ import java.util.Objects;
 
 public abstract class QualityItem extends Item {
 
+    private static final int MIN_QUALITY = 0;
+    private static final int MAX_QUALITY = 50;
+
     QualityItem(String name, int sellIn, int quality) {
         super(name, sellIn, quality);
     }
@@ -16,22 +19,29 @@ public abstract class QualityItem extends Item {
         item.sellIn--;
     }
 
-    boolean minQualityNotReached(Item item) {
-        return item.quality > 0;
+    void increaseItemQualityIfMaxNotReached(Item item) {
+        if (maxQualityNotReached(item)) {
+            item.quality++;
+        }
     }
 
-    boolean maxQualityNotReached(Item item) {
-        return item.quality < 50;
+    private boolean maxQualityNotReached(Item item) {
+        return item.quality < MAX_QUALITY;
     }
 
-    void increaseItemQuality(Item item) {
-        item.quality++;
+    boolean sellInReached(Item item) {
+        return item.sellIn < 0;
     }
 
     void decreaseItemQuality(Item item) {
-        item.quality--;
+        if (minQualityNotReached(item)) {
+            item.quality--;
+        }
     }
 
+    private boolean minQualityNotReached(Item item) {
+        return item.quality > MIN_QUALITY;
+    }
 
     @Override
     public boolean equals(Object o) {

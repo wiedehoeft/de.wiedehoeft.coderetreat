@@ -13,18 +13,14 @@ public class BackstagePass extends QualityItem {
 
         increaseSellIn(item);
 
-        if (maxQualityNotReached(item)) {
-            increaseItemQuality(item);
-        }
+        increaseItemQualityIfMaxNotReached(item);
 
-        if (item.sellIn < 11 && maxQualityNotReached(item)) {
-            increaseItemQuality(item);
+        if (item.sellIn < 11) {
+            increaseItemQualityIfMaxNotReached(item);
         }
 
         if (item.sellIn < 6) {
-            if (maxQualityNotReached(item)) {
-                increaseItemQuality(item);
-            }
+            increaseItemQualityIfMaxNotReached(item);
         }
 
         if (item.sellIn < 0) {

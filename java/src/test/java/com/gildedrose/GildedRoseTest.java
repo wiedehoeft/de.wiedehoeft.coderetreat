@@ -35,7 +35,9 @@ class GildedRoseTest {
         BACKSTAGE_PASS_0DAYS(new BackstagePass(0, 20), new BackstagePass(-1, 0)),
         BACKSTAGE_PASS_MAX_QUALITY(new BackstagePass(3, 50), new BackstagePass(2, 50)),
         CONJURED_MANA_CAKE(new ConjuredManaCaka(5, 8), new ConjuredManaCaka(4, 6)),
-        CONJURED_MANA_CAKE_MIN_QUALITY(new ConjuredManaCaka(5, 1), new ConjuredManaCaka(4, 0));
+        CONJURED_MANA_CAKE_MIN_QUALITY(new ConjuredManaCaka(5, 1), new ConjuredManaCaka(4, 0)),
+        CONJURED_MANA_CAKE_ZERO_SELLIN(new ConjuredManaCaka(0, 10), new ConjuredManaCaka(-1, 6)),
+        ;
 
         QualityItem qualityItemGiven;
         QualityItem qualityItemExpected;
