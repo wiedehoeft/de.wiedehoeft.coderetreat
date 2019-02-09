@@ -15,7 +15,7 @@ public abstract class QualityItem extends Item {
 
     public abstract void updateQuality();
 
-    void increaseSellIn() {
+    void decreaseSellIn() {
         sellIn--;
     }
 
@@ -51,10 +51,5 @@ public abstract class QualityItem extends Item {
         return sellIn == item.sellIn &&
                 quality == item.quality &&
                 Objects.equals(name, item.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, sellIn, quality);
     }
 }

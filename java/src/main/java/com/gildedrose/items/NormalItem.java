@@ -10,7 +10,7 @@ public class NormalItem extends QualityItem {
     public void updateQuality() {
         decreaseItemQuality();
 
-        increaseSellIn();
+        decreaseSellIn();
 
         if (sellInReached()) {
             decreaseItemQuality();

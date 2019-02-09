@@ -11,7 +11,7 @@ public class ConjuredManaCaka extends QualityItem {
         decreaseItemQuality();
         decreaseItemQuality();
 
-        increaseSellIn();
+        decreaseSellIn();
 
         if (sellInReached()) {
             decreaseItemQuality();

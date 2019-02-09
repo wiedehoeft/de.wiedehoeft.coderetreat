@@ -9,7 +9,7 @@ public class BackstagePass extends QualityItem {
     @Override
     public void updateQuality() {
 
-        increaseSellIn();
+        decreaseSellIn();
 
         increaseItemQualityIfMaxNotReached();
 

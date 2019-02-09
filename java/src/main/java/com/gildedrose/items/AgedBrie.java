@@ -9,7 +9,7 @@ public class AgedBrie extends QualityItem {
     @Override
     public void updateQuality() {
 
-        increaseSellIn();
+        decreaseSellIn();
         increaseItemQualityIfMaxNotReached();
 
         if (sellInReached()) {
