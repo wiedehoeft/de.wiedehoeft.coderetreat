@@ -1,7 +1,5 @@
 package com.gildedrose.items;
 
-import com.gildedrose.Item;
-
 public class ConjuredManaCaka extends QualityItem {
 
     public ConjuredManaCaka(int sellIn, int quality) {
@@ -9,15 +7,15 @@ public class ConjuredManaCaka extends QualityItem {
     }
 
     @Override
-    public void updateQuality(Item item) {
-        decreaseItemQuality(item);
-        decreaseItemQuality(item);
+    public void updateQuality() {
+        decreaseItemQuality();
+        decreaseItemQuality();
 
-        increaseSellIn(item);
+        increaseSellIn();
 
-        if (item.sellIn < 0) {
-            decreaseItemQuality(item);
-            decreaseItemQuality(item);
+        if (sellInReached()) {
+            decreaseItemQuality();
+            decreaseItemQuality();
         }
     }
 }

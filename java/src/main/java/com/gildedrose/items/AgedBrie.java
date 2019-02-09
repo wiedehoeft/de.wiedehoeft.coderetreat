@@ -1,7 +1,5 @@
 package com.gildedrose.items;
 
-import com.gildedrose.Item;
-
 public class AgedBrie extends QualityItem {
 
     public AgedBrie(int sellIn, int quality) {
@@ -9,13 +7,13 @@ public class AgedBrie extends QualityItem {
     }
 
     @Override
-    public void updateQuality(Item item) {
+    public void updateQuality() {
 
-        increaseSellIn(item);
-        increaseItemQualityIfMaxNotReached(item);
+        increaseSellIn();
+        increaseItemQualityIfMaxNotReached();
 
-        if (item.sellIn < 0) {
-            increaseItemQualityIfMaxNotReached(item);
+        if (sellInReached()) {
+            increaseItemQualityIfMaxNotReached();
         }
     }
 }

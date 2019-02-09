@@ -1,7 +1,5 @@
 package com.gildedrose.items;
 
-import com.gildedrose.Item;
-
 public class BackstagePass extends QualityItem {
 
     public BackstagePass(int sellIn, int quality) {
@@ -9,22 +7,22 @@ public class BackstagePass extends QualityItem {
     }
 
     @Override
-    public void updateQuality(Item item) {
+    public void updateQuality() {
 
-        increaseSellIn(item);
+        increaseSellIn();
 
-        increaseItemQualityIfMaxNotReached(item);
+        increaseItemQualityIfMaxNotReached();
 
-        if (item.sellIn < 11) {
-            increaseItemQualityIfMaxNotReached(item);
+        if (sellIn < 11) {
+            increaseItemQualityIfMaxNotReached();
         }
 
-        if (item.sellIn < 6) {
-            increaseItemQualityIfMaxNotReached(item);
+        if (sellIn < 6) {
+            increaseItemQualityIfMaxNotReached();
         }
 
-        if (item.sellIn < 0) {
-            item.quality = 0;
+        if (sellIn < 0) {
+            quality = 0;
         }
     }
 }

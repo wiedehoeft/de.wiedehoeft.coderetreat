@@ -13,34 +13,34 @@ public abstract class QualityItem extends Item {
         super(name, sellIn, quality);
     }
 
-    public abstract void updateQuality(Item item);
+    public abstract void updateQuality();
 
-    void increaseSellIn(Item item) {
-        item.sellIn--;
+    void increaseSellIn() {
+        sellIn--;
     }
 
-    void increaseItemQualityIfMaxNotReached(Item item) {
-        if (maxQualityNotReached(item)) {
-            item.quality++;
+    void increaseItemQualityIfMaxNotReached() {
+        if (maxQualityNotReached()) {
+            quality++;
         }
     }
 
-    private boolean maxQualityNotReached(Item item) {
-        return item.quality < MAX_QUALITY;
+    private boolean maxQualityNotReached() {
+        return quality < MAX_QUALITY;
     }
 
-    boolean sellInReached(Item item) {
-        return item.sellIn < 0;
+    boolean sellInReached() {
+        return sellIn < 0;
     }
 
-    void decreaseItemQuality(Item item) {
-        if (minQualityNotReached(item)) {
-            item.quality--;
+    void decreaseItemQuality() {
+        if (minQualityNotReached()) {
+            quality--;
         }
     }
 
-    private boolean minQualityNotReached(Item item) {
-        return item.quality > MIN_QUALITY;
+    private boolean minQualityNotReached() {
+        return quality > MIN_QUALITY;
     }
 
     @Override

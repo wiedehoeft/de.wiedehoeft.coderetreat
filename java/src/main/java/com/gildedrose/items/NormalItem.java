@@ -1,7 +1,5 @@
 package com.gildedrose.items;
 
-import com.gildedrose.Item;
-
 public class NormalItem extends QualityItem {
 
     public NormalItem(String name, int sellIn, int quality) {
@@ -9,13 +7,13 @@ public class NormalItem extends QualityItem {
     }
 
     @Override
-    public void updateQuality(Item item) {
-        decreaseItemQuality(item);
+    public void updateQuality() {
+        decreaseItemQuality();
 
-        increaseSellIn(item);
+        increaseSellIn();
 
-        if (sellInReached(item)) {
-            decreaseItemQuality(item);
+        if (sellInReached()) {
+            decreaseItemQuality();
         }
     }
 }

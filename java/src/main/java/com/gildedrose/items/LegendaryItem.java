@@ -1,7 +1,5 @@
 package com.gildedrose.items;
 
-import com.gildedrose.Item;
-
 public class LegendaryItem extends QualityItem {
 
     public LegendaryItem(String name, int sellIn, int quality) {
@@ -9,7 +7,7 @@ public class LegendaryItem extends QualityItem {
     }
 
     @Override
-    public void updateQuality(Item item) {
+    public void updateQuality() {
 
     }
 }
